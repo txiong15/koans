@@ -15,6 +15,14 @@
 #
 def triangle(a, b, c)
   # WRITE THIS CODE
+  if (a <= 0 || b <= 0 || c <= 0)
+    raise TriangleError, "lengths cannot be less than or equal to 0"
+  end
+  
+  if (a + b <= c) || (a + c <= b) || (b + c <= a)
+    raise TriangleError, "No two sides can add to be less than or equal to the other side" 
+  end
+  
   if (a == b && b == c) 
     :equilateral
   elsif (a == b || b == c || a == c)

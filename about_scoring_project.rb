@@ -31,6 +31,56 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 def score(dice)
   # You need to write this method
+  fivePoints = 50
+  onePoints = 100
+  setThreeNumbersPoints = 100
+  
+  points = 0
+  rollCount = {1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0}
+  if dice.length == 0 
+    return points;
+  end
+  
+  dice.each do |roll|
+    
+    
+    rollCount[roll] = rollCount.fetch(roll) + 1
+  end
+  
+  # for rolls equal to 1 
+  if rollCount[1] >= 3
+    points += 1000
+    rollCount[1] -= 3
+  end
+  
+  if rollCount[1] > 0
+    points += rollCount[1] * onePoints
+    rollCount[1] = 0 # reset rollCount for 1 so we do not re-add the points
+  end
+
+  # for rolls equal to 5  
+  if rollCount[5] >= 3
+    points += 100 * 5
+    rollCount[5] -= 3
+  end
+  
+  if rollCount[5] > 0
+    points += rollCount[5] * fivePoints
+    rollCount[5] = 0 # reset rollCount for 5 so we do not re-add the points
+  end
+  
+  # check for triples of the other numbers
+  rollCount.each do |key, count|
+    case count
+    when 3
+      points += key * 100 
+    else
+      points += 0
+    end
+  end
+  
+  return points
+  
 end
 
 class AboutScoringProject < Neo::Koan
