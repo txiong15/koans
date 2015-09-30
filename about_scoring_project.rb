@@ -42,8 +42,6 @@ def score(dice)
   end
   
   dice.each do |roll|
-    
-    
     rollCount[roll] = rollCount.fetch(roll) + 1
   end
   
