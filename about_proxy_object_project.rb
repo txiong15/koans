@@ -42,9 +42,9 @@ class Proxy
     @messages.select { |m| m == methodName}.size
   end
   
-  def method_missing(method_name, *args, &block)
-    @messages << method_name
-    @object.send method_name, *args, &block
+  def method_missing(methodName, *args, &block)
+    @messages << methodName
+    @object.send methodName, *args, &block
   end
 
   
